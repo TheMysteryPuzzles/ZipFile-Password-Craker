@@ -6,29 +6,13 @@ from queue import Queue
 
 if __name__ == '__main__':
 
-    No_Of_Threads = 4
     queue = Queue()
-
     def extractFile(zFile, password):
         try:
             zFile.extractall(pwd=password)
             print("Password Found" + password)
         except:
             pass
-
-    def createQueue(zfile, filename):
-        passFile = open(dname)
-        for line in passFile.readlines():
-            password = line.strip("\n")
-            queue.put(zfile, password)
-        queue.join()
-
-
-    def createThreads():
-        for _ in range(No_Of_Threads):
-            t = threading.Thread(target=extractFile, args=(zFile, password))
-            t.daemon = True
-            t.start()
 
     def main():
         print("Test")
@@ -43,10 +27,12 @@ if __name__ == '__main__':
         else:
             zname = options.zname
             dname = options.dname
-            createThreads()
-            createQueue(zname, dname)
-            #zFile = zipfile.ZipFile(zname)
-            '''for line in passFile.readlines():
+            #createQueue(dname)
+            zFile = zipfile.ZipFile(zname)
+            passFile = open(dname)
+            for line in passFile.readlines():
                 password = line.strip("\n")
                 t = threading.Thread(target=extractFile, args=(zFile, password))
-                t.start()'''
+                t.start()
+
+    main()
